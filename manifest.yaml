@@ -23,3 +23,34 @@ spec:
       - image: {{.Values.image}}
         imagePullPolicy: IfNotPresent
         livenessProbe:
+          httpGet:
+            path: /healthz/ready
+            port: http
+        name: sampleapi
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /healthz/ready
+            port: http
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        volumeMounts:
+        - mountPath: /app/appsettings.json
+          name: appsettings-volume
+          readOnly: true
+          subPath: appsettings.json
+      nodeSelector:
+        kubernetes.io/os: linux
+      restartPolicy: Always
+      volumes:
+      - name: appsettings-volume
+        secret:
+          secretName: sampleapisecrets
