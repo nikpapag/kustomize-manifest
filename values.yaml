@@ -1,2 +1,2 @@
-image: <+pipeline.image>
-namespace: <+pipeline.namespace>
+image: <+pipeline.variables.image>
+namespace: <+pipeline.variables.namespace>
