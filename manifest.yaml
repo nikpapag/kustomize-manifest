@@ -6,7 +6,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sampleapi
+  name: sample-api
 spec:
   replicas: 1
   revisionHistoryLimit: 3
